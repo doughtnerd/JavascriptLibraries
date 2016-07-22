@@ -29,11 +29,14 @@ var ArrayList = function(){
 		if(count>0){
 			return data.shift();
 		} else {
-			throw new NoSuchElementException('Array is empty');
+			throw new E('Array is empty');
 		}
 	};
 	
 	this.remove = function(index){
+  	if(index<0 || index > count-1){
+    	throw new OutofBoundsException('Index was out of array bounds');
+    }
 		if(count==0){
 			throw new NoSuchElementException('Array is empty');
 		}
@@ -279,21 +282,21 @@ var BinarySearchTree = function(){
 	
 	this.toArrayList = function(){
 		var list = new ArrayList();
-		toArrayRecursive(list, root);
+		toArrayListRecursive(list, root);
 		return list;
 	};
 	
-	var toArrayRecursive = function(list, node){
+	var toArrayListRecursive = function(list, node){
 		if (node === undefined) {
 			return;
 		} else {
-			toArrayRecursive(list, node.left);
+			toArrayListRecursive(list, node.left);
 			list.add(node.data);
-			toArrayRecursive(list, node.right);
+			toArrayListRecursive(list, node.right);
 		}
 	};
 	
-  this.getTreeData = function(){
+	this.getTreeData = function(){
 		return root;
 	};
   
